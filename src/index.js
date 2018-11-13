@@ -37,7 +37,7 @@ function loadCardOrder() {
 }
 
 function getCardOrder() {
-    let links = [...document.querySelectorAll('#DashboardCard_Container > .ic-DashboardCard__box a.ic-DashboardCard__link')];
+    let links = Array.from(document.querySelectorAll('#DashboardCard_Container > .ic-DashboardCard__box a.ic-DashboardCard__link'));
     
     return links.map(link => Number(link.href.match(/courses\/(\d+)$/)[1]));
 }
