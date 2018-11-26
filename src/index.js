@@ -1,5 +1,5 @@
 
-const url = '/api/v1/users/self/custom_data';
+const url = '/api/v1/users/self/dashboard_positions';
 const namespace = 'ahsdile/canvas-theme-sort-dashboard-courses-plugin';
 
 
@@ -14,25 +14,54 @@ function makeSortable() {
 }
 
 function saveCardOrder(order) {
-    let params = {
-        ns: namespace,
-        data: order
-    };
+    let positions = {};
+    
+    order.forEach(function (item, index) {
+        positions['course_' + item] = index;
+    });
     
     $.ajax({
         type: 'PUT',
         url,
-        data: params
+        data: {
+            dashboard_positions: positions
+        }
     });
 }
 
 function loadCardOrder() {
+    const oldUrl = '/api/v1/users/self/custom_data';
     let params = {
         ns: namespace
     };
     
-    $.getJSON(url, params, function (data) {
-        setCardOrder(data.data.map(item => Number(item)));
+    $.ajax({
+        dataType: "json",
+        url: oldUrl,
+        data: params,
+        success: function (data) {
+            let order = data.data.map(item => Number(item));
+            
+            $.ajax({
+                type: 'DELETE',
+                url: oldUrl,
+                data: params
+            });
+        
+            saveCardOrder(order);
+            setCardOrder(order);
+        },
+        error: function () {
+            let order = [];
+            
+            $.getJSON(url, function (data) {
+                Object.keys(data.dashboard_positions).map(function (item, index) {
+                    order[data.dashboard_positions[item]] = item.replace(/course_(\d+)/, '$1');
+                });
+            });
+            
+            setCardOrder(order);
+        }
     });
 }
 
