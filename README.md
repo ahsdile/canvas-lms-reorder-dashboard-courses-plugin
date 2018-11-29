@@ -7,11 +7,13 @@ Plugin for the [Canvas LMS theme app](https://github.com/ahsdile/canvas-lms-app)
 Canvas has finally added this functionality in their beta release and will push it to the production environment on
 December 8th. This plug-in will then become obsolete.
 
-The new API for this has been available for quite some time but had no effect an had a warning that it was not
+The new API for this has been available for quite some time but had no effect and had a warning that it was not
 finalized yet. For that reason, this plug-in saves its data via the Canvas `custom_data` API instead of the
 `dashboard_positions` API. Removing this plug-in from your script will *NOT* remove the old data from Canvas.
 Therefore I've created two versions of the scripts that will gradually delete this data as users log in to their
 dashboard.
+
+**UPDATE:** It seems that that the reordering is still a bit buggy in Canvas. You can safely use version 0.2 until it becomes stable.
 
 ### v0.1.1
 
