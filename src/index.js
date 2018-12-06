@@ -58,9 +58,9 @@ function loadCardOrder() {
                 Object.keys(data.dashboard_positions).map(function (item, index) {
                     order[data.dashboard_positions[item]] = item.replace(/course_(\d+)/, '$1');
                 });
+                
+                setCardOrder(order);
             });
-            
-            setCardOrder(order);
         }
     });
 }
