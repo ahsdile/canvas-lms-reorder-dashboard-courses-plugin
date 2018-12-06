@@ -18,7 +18,7 @@ dashboard.
 This last regular version will keep working and will override the native drag-and-drop behavior when it is released.
 Everything stays the same for the users.
 
-### v0.2 
+### v0.2.1
 
 This version will try to read the `custom_data` API and if data exists, will delete it and save it to the new
 `dashboard_positions` API. Drag-and-drop will still be handled by this plug-in even when the native functionality
